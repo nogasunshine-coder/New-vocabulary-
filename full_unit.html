@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art & Landmarks – Grade 9 Interactive Unit</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --yellow: #FFE066;
+    --orange: #FF8C00;
+    --green: #4CAF50;
+    --teal: #009688;
+    --blue: #1565C0;
+    --purple: #7B1FA2;
+    --pink: #E91E63;
+    --red: #E53935;
+    --gray: #F5F5F5;
+    --dark: #212121;
+    --white: #FFFFFF;
+    --correct: #43A047;
+    --wrong: #E53935;
+    --shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 50%, #FFF9E6 100%);
+    min-height: 100vh;
+    color: var(--dark);
+  }
+
+  header {
+    background: linear-gradient(135deg, #FF8C00, #FFB300);
+    padding: 28px 20px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -30px; left: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: white;
+    text-shadow: 2px 3px 8px rgba(0,0,0,0.25);
+    letter-spacing: 1px;
+  }
+  header p {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 36px 0 18px;
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: var(--shadow);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--dark);
+  }
+  .section-header p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 2px;
+    font-weight: 600;
+  }
+
+  /* ── INSTRUCTION BOX ── */
+  .instruction-box {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    border-left: 5px solid var(--orange);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    box-shadow: var(--shadow);
+  }
+  .instruction-box strong { color: var(--orange); }
+
+  /* ── PASSIVE VOICE CARDS ── */
+  .passive-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+  }
+  .passive-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.15); }
+  .passive-card.correct { border-color: var(--correct); background: #F1FFF3; }
+  .passive-card.wrong { border-color: var(--wrong); background: #FFF3F3; }
+
+  .num-badge {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    font-size: 0.95rem;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .num-1 { background: #4CAF50; }
+  .num-2 { background: #9C27B0; }
+  .num-3 { background: #FF9800; }
+  .num-4 { background: #009688; }
+  .num-5 { background: #2196F3; }
+  .num-6 { background: #E91E63; }
+  .num-7 { background: #795548; }
+  .num-8 { background: #607D8B; }
+
+  .passive-content { flex: 1; }
+  .passive-sentence {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .passive-sentence .verb-hint {
+    color: var(--orange);
+    font-style: italic;
+  }
+
+  .answer-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .answer-input {
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    width: 200px;
+    transition: border-color 0.2s;
+    background: #FAFAFA;
+  }
+  .answer-input:focus { outline: none; border-color: var(--orange); background: white; }
+  .answer-input.correct-input { border-color: var(--correct); background: #F0FFF4; color: var(--correct); }
+  .answer-input.wrong-input { border-color: var(--wrong); background: #FFF5F5; color: var(--wrong); }
+
+  .feedback-icon {
+    font-size: 1.3rem;
+    display: none;
+  }
+  .feedback-msg {
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: none;
+  }
+  .feedback-msg.correct { color: var(--correct); }
+  .feedback-msg.wrong { color: var(--wrong); }
+
+  /* match picture */
+  .match-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .match-label { font-size: 0.85rem; font-weight: 700; color: #555; }
+  .match-select {
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: #FAFAFA;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .match-select:focus { outline: none; border-color: var(--orange); }
+  .match-select.correct-input { border-color: var(--correct); background: #F0FFF4; color: var(--correct); }
+  .match-select.wrong-input { border-color: var(--wrong); background: #FFF5F5; color: var(--wrong); }
+
+  /* ── LANDMARKS QUIZ ── */
+  .landmark-card {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .landmark-card.correct { border-color: var(--correct); }
+  .landmark-card.wrong { border-color: var(--wrong); }
+
+  .landmark-top {
+    display: flex;
+    gap: 0;
+  }
+  .landmark-q-num {
+    width: 50px;
+    background: linear-gradient(135deg, #1565C0, #1976D2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+  }
+  .landmark-q-body {
+    padding: 18px 18px 14px;
+    flex: 1;
+  }
+  .landmark-question {
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.55;
+    color: #222;
+    margin-bottom: 14px;
+  }
+  .landmark-question .kw { color: #1565C0; font-weight: 800; }
+
+  .landmark-options { display: flex; flex-direction: column; gap: 8px; }
+  .landmark-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    border: 2px solid #E0E0E0;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.92rem;
+    font-weight: 600;
+    background: #FAFAFA;
+  }
+  .landmark-option:hover { border-color: #1565C0; background: #EEF4FF; }
+  .landmark-option input[type="radio"] { display: none; }
+  .option-letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #E0E0E0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: #555;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .landmark-option:hover .option-letter { background: #1565C0; color: white; }
+  .landmark-option.selected { border-color: #1565C0; background: #EEF4FF; }
+  .landmark-option.selected .option-letter { background: #1565C0; color: white; }
+  .landmark-option.option-correct { border-color: var(--correct); background: #F0FFF4; }
+  .landmark-option.option-correct .option-letter { background: var(--correct); color: white; }
+  .landmark-option.option-wrong { border-color: var(--wrong); background: #FFF5F5; }
+  .landmark-option.option-wrong .option-letter { background: var(--wrong); color: white; }
+
+  .landmark-images {
+    display: flex;
+    background: #F0F0F0;
+    border-top: 1px solid #E8E8E8;
+  }
+  .landmark-img-wrap {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    padding: 4px 4px 6px;
+  }
+  .landmark-img-wrap img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+  .img-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #555;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+  .landmark-feedback {
+    display: none;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-top: 1px solid #EEE;
+  }
+  .landmark-feedback.correct { color: var(--correct); background: #F6FFF7; display: block; }
+  .landmark-feedback.wrong { color: var(--wrong); background: #FFF6F6; display: block; }
+
+  /* ── BUTTONS ── */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .btn {
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+  .btn:active { transform: translateY(0); }
+  .btn-check { background: linear-gradient(135deg, #FF8C00, #FFB300); color: white; }
+  .btn-retry { background: linear-gradient(135deg, #1565C0, #1976D2); color: white; }
+  .btn-score { background: linear-gradient(135deg, #43A047, #66BB6A); color: white; display: none; }
+
+  /* ── SCORE PANEL ── */
+  .score-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    display: none;
+    margin-top: 32px;
+    border: 3px solid var(--yellow);
+  }
+  .score-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .score-big {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    margin: 10px 0;
+  }
+  .score-details { font-size: 0.9rem; color: #666; font-weight: 600; }
+
+  /* ── STICKY SCORE BADGE ── */
+  .sticky-score {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #FF8C00, #FFB300);
+    color: white;
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-weight: 900;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 16px rgba(255,140,0,0.4);
+    z-index: 100;
+    display: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .sticky-score:hover { transform: scale(1.05); }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    margin: 40px 0;
+    border-radius: 2px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.6rem; }
+    .passive-card { flex-direction: column; gap: 10px; }
+    .answer-input { width: 160px; }
+    .landmark-q-num { width: 40px; font-size: 1.4rem; }
+    .landmark-img-wrap img { height: 70px; }
+  }
+
+
+:root {
+  --yellow:#FFE066; --orange:#FF8C00; --green:#43A047; --blue:#1565C0;
+  --purple:#7B1FA2; --teal:#00796B; --pink:#C2185B; --red:#E53935;
+  --correct:#43A047; --wrong:#E53935; --shadow:0 4px 20px rgba(0,0,0,0.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF9E6,#FFF3CD 60%,#FFF9E6);min-height:100vh;color:#212121;}
+
+header{background:linear-gradient(135deg,#7B1FA2,#9C27B0);padding:24px 20px 18px;text-align:center;box-shadow:var(--shadow);}
+header h1{font-family:'Playfair Display',serif;font-size:2rem;color:white;text-shadow:2px 3px 8px rgba(0,0,0,0.3);}
+header p{color:rgba(255,255,255,0.88);font-size:.9rem;margin-top:5px;font-weight:600;}
+
+.tab-bar{display:flex;overflow-x:auto;background:white;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:50;}
+.tab-btn{flex:1;min-width:90px;padding:13px 8px;border:none;background:white;font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;color:#888;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;}
+.tab-btn:hover{color:var(--purple);background:#F8F0FF;}
+.tab-btn.active{color:var(--purple);border-bottom-color:var(--purple);background:#F8F0FF;}
+
+.container{max-width:900px;margin:0 auto;padding:28px 16px 60px;}
+.tab-panel{display:none;} .tab-panel.active{display:block;}
+
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.sec-icon{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:var(--shadow);}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:1.5rem;}
+.sec-head p{font-size:.82rem;color:#666;font-weight:600;margin-top:2px;}
+
+.inst{background:white;border-radius:12px;padding:13px 18px;margin-bottom:22px;border-left:5px solid var(--purple);font-size:.88rem;line-height:1.6;box-shadow:var(--shadow);}
+.inst strong{color:var(--purple);}
+
+/* WORD GRID */
+.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:20px;}
+.word-card{background:white;border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;border:2px solid transparent;transition:border-color .25s,background .25s;}
+.word-card.correct{border-color:var(--correct);background:#F1FFF3;}
+.word-card.wrong{border-color:var(--wrong);background:#FFF3F3;}
+.word-num{width:26px;height:26px;border-radius:50%;background:var(--purple);color:white;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;flex-shrink:0;}
+.word-en{font-weight:800;font-size:.9rem;flex:1;}
+.trans-input{border:2px solid #DDD;border-radius:8px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;width:120px;direction:rtl;transition:border-color .2s;background:#FAFAFA;}
+.trans-input:focus{outline:none;border-color:var(--purple);background:white;}
+.trans-input.ok{border-color:var(--correct);background:#F0FFF4;color:var(--correct);}
+.trans-input.err{border-color:var(--wrong);background:#FFF5F5;color:var(--wrong);}
+.wfb{font-size:1rem;min-width:20px;}
+
+/* WORD BANK */
+.wb-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.wb-tag{background:#F0E6FF;color:var(--purple);border-radius:20px;padding:4px 12px;font-size:.8rem;font-weight:800;border:1.5px solid #D8B0FF;}
+
+/* MATCH */
+.match-pair{display:flex;align-items:center;gap:10px;margin-bottom:10px;background:white;border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);border:2px solid transparent;transition:border-color .2s;}
+.match-pair.correct{border-color:var(--correct);background:#F1FFF3;}
+.match-pair.wrong{border-color:var(--wrong);background:#FFF3F3;}
+.match-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;color:white;flex-shrink:0;}
+.match-en{flex:1;font-weight:800;font-size:.88rem;}
+.match-sel{border:2px solid #DDD;border-radius:8px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:700;background:#FAFAFA;cursor:pointer;min-width:150px;direction:rtl;}
+.match-sel:focus{outline:none;border-color:var(--teal);}
+.match-sel.ok{border-color:var(--correct);background:#F0FFF4;color:var(--correct);}
+.match-sel.err{border-color:var(--wrong);background:#FFF5F5;color:var(--wrong);}
+.mfb{font-size:1rem;min-width:18px;}
+
+/* CLUE / PUZZLE */
+.clue-item{display:flex;align-items:center;gap:10px;background:white;border-radius:10px;padding:10px 14px;margin-bottom:8px;box-shadow:var(--shadow);border:2px solid transparent;}
+.clue-item.correct{border-color:var(--correct);background:#F1FFF3;}
+.clue-item.wrong{border-color:var(--wrong);background:#FFF3F3;}
+.clue-num{font-weight:900;font-size:.85rem;color:var(--pink);min-width:20px;}
+.clue-text{font-size:.88rem;flex:1;font-weight:600;line-height:1.4;}
+.clue-inp{border:2px solid #DDD;border-radius:8px;padding:4px 10px;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;width:120px;transition:border-color .2s;background:#FAFAFA;}
+.clue-inp:focus{outline:none;border-color:var(--pink);}
+.clue-inp.ok{border-color:var(--correct);background:#F0FFF4;color:var(--correct);}
+.clue-inp.err{border-color:var(--wrong);background:#FFF5F5;color:var(--wrong);}
+.cfb{font-size:1rem;min-width:18px;}
+.hw-row{background:linear-gradient(135deg,#F8F0FF,#EDE7F6);border-radius:12px;padding:14px 18px;margin-top:16px;font-size:.9rem;font-weight:700;}
+.hw-inp{border:2px solid #C8A0F0;border-radius:8px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;width:160px;margin-left:8px;}
+.hw-inp:focus{outline:none;border-color:var(--purple);}
+.hw-inp.ok{border-color:var(--correct);background:#F0FFF4;color:var(--correct);}
+.hw-inp.err{border-color:var(--wrong);background:#FFF5F5;color:var(--wrong);}
+
+/* DIALOGUE */
+.dial-card{background:white;border-radius:14px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow);border:2px solid transparent;}
+.dial-card.correct{border-color:var(--correct);background:#F1FFF3;}
+.dial-card.wrong{border-color:var(--wrong);background:#FFF3F3;}
+.dial-num{font-weight:900;font-size:.8rem;color:var(--teal);margin-bottom:8px;}
+.dial-line{font-size:.88rem;line-height:1.6;margin-bottom:3px;}
+.dial-line .spk{font-weight:900;color:#444;}
+.choice-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.choice-btn{padding:6px 16px;border-radius:20px;border:2px solid #DDD;background:#FAFAFA;font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .2s;font-style:italic;}
+.choice-btn:hover{border-color:var(--teal);background:#E0F2F1;color:var(--teal);}
+.choice-btn.sel{border-color:var(--teal);background:#E0F2F1;color:var(--teal);}
+.choice-btn.opt-ok{border-color:var(--correct);background:#F0FFF4;color:var(--correct);}
+.choice-btn.opt-err{border-color:var(--wrong);background:#FFF5F5;color:var(--wrong);}
+.dfb{font-size:.8rem;font-weight:700;margin-top:6px;display:none;}
+.dfb.show{display:block;}
+.dfb.correct{color:var(--correct);}
+.dfb.wrong{color:var(--wrong);}
+
+/* SENTENCE MATCH */
+.sent-pair{background:white;border-radius:12px;padding:10px 14px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:10px;border:2px solid transparent;}
+.sent-pair.correct{border-color:var(--correct);background:#F1FFF3;}
+.sent-pair.wrong{border-color:var(--wrong);background:#FFF3F3;}
+.sent-num{font-weight:900;font-size:.8rem;color:#999;min-width:16px;}
+.sent-a{font-size:.87rem;flex:1;font-weight:600;line-height:1.5;}
+.sent-a b{color:#1565C0;}
+.sent-sel{border:2px solid #DDD;border-radius:8px;padding:4px 6px;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:700;background:#FAFAFA;cursor:pointer;min-width:40px;}
+.sent-sel:focus{outline:none;border-color:var(--blue);}
+.sent-sel.ok{border-color:var(--correct);background:#F0FFF4;color:var(--correct);}
+.sent-sel.err{border-color:var(--wrong);background:#FFF5F5;color:var(--wrong);}
+.sfb{font-size:.9rem;min-width:18px;}
+.b-box{background:white;border-radius:12px;padding:14px 18px;box-shadow:var(--shadow);margin-bottom:18px;}
+.b-box h4{font-weight:900;font-size:.83rem;color:#555;margin-bottom:8px;}
+.b-item{font-size:.84rem;font-weight:600;margin-bottom:4px;color:#444;}
+.b-item span{font-weight:900;color:var(--blue);margin-right:4px;}
+
+/* FILL */
+.fill-card{background:white;border-radius:14px;padding:13px 16px;margin-bottom:11px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;border:2px solid transparent;}
+.fill-card.correct{border-color:var(--correct);background:#F1FFF3;}
+.fill-card.wrong{border-color:var(--wrong);background:#FFF3F3;}
+.fill-num{width:26px;height:26px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;flex-shrink:0;margin-top:3px;}
+.fill-sent{flex:1;font-size:.88rem;line-height:1.7;font-weight:600;}
+.fill-inp{display:inline-block;border:none;border-bottom:2px solid #AAA;padding:1px 6px;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;width:120px;background:transparent;}
+.fill-inp:focus{outline:none;border-bottom-color:var(--teal);}
+.fill-inp.ok{border-bottom-color:var(--correct);color:var(--correct);}
+.fill-inp.err{border-bottom-color:var(--wrong);color:var(--wrong);}
+.ffb{font-size:.78rem;font-weight:700;display:none;margin-top:4px;}
+.ffb.show{display:block;}
+.ffb.correct{color:var(--correct);}
+.ffb.wrong{color:var(--wrong);}
+.fill-bank{background:#E8F5E9;border-radius:12px;padding:11px 16px;margin-bottom:18px;}
+.fill-bank strong{color:var(--teal);}
+.bwords{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px;}
+.bw{background:white;border:1.5px solid #A5D6A7;border-radius:20px;padding:3px 11px;font-size:.8rem;font-weight:800;color:var(--teal);}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.btn{padding:10px 22px;border-radius:12px;border:none;font-family:'Nunito',sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 3px 10px rgba(0,0,0,.13);}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.18);}
+.btn-check{background:linear-gradient(135deg,#7B1FA2,#9C27B0);color:white;}
+.btn-retry{background:linear-gradient(135deg,#1565C0,#1976D2);color:white;}
+.btn-score{background:linear-gradient(135deg,#43A047,#66BB6A);color:white;display:none;}
+
+/* SCORE */
+.score-panel{background:white;border-radius:20px;padding:24px 20px;text-align:center;box-shadow:var(--shadow);display:none;margin-top:26px;border:3px solid var(--yellow);}
+.score-panel h3{font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:6px;}
+.score-big{font-size:2.6rem;font-weight:900;margin:8px 0;}
+.score-sub{font-size:.86rem;color:#666;font-weight:600;}
+
+.group-title{font-weight:900;font-size:.98rem;color:#333;margin:0 0 12px;}
+.group-wrap{margin-bottom:26px;}
+
+.divider{height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);margin:28px 0;border-radius:2px;}
+
+@media(max-width:600px){
+  header h1{font-size:1.5rem;}
+  .tab-btn{font-size:.7rem;padding:10px 5px;min-width:70px;}
+  .word-grid{grid-template-columns:1fr;}
+  .trans-input{width:110px;}
+  .fill-inp{width:90px;}
+}
+
+.main-nav{display:flex;background:#1A1A2E;overflow-x:auto;position:sticky;top:0;z-index:200;box-shadow:0 3px 12px rgba(0,0,0,0.3);}
+.main-nav-btn{flex:1;min-width:160px;padding:16px 12px;border:none;background:transparent;font-family:"Nunito",sans-serif;font-size:.95rem;font-weight:800;color:rgba(255,255,255,0.6);cursor:pointer;border-bottom:4px solid transparent;transition:all .2s;white-space:nowrap;}
+.main-nav-btn:hover{color:white;background:rgba(255,255,255,0.07);}
+.main-nav-btn.active{color:white;border-bottom-color:#FFE066;background:rgba(255,255,255,0.1);}
+.main-panel{display:none;}.main-panel.active{display:block;}
+.vocab-tab-bar{display:flex;overflow-x:auto;background:white;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:57px;z-index:100;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎨 Art &amp; Landmarks</h1>
+  <p>Grade 9 Interactive Unit &nbsp;|&nbsp; Grammar &amp; Vocabulary</p>
+</header>
+
+<nav class="main-nav">
+  <button class="main-nav-btn active" onclick="showMain('grammar',this)">📝 Grammar &amp; Landmarks</button>
+  <button class="main-nav-btn" onclick="showMain('vocab',this)">📚 Vocabulary Practice</button>
+</nav>
+
+<div class="main-panel active" id="grammar">
+  <div class="container">
+
+
+  <!-- ══════════ PART A: FUN ART FACTS ══════════ -->
+  <div class="section-header">
+    <div class="section-icon" style="background:linear-gradient(135deg,#FF8C00,#FFB300);">🖼️</div>
+    <div>
+      <h2>Part A – Fun Art Facts</h2>
+      <p>Complete each sentence with the correct passive form of the verb in brackets. Then match each fact to a picture (a–h).</p>
+    </div>
+  </div>
+
+  <div class="instruction-box">
+    <strong>📝 How to answer:</strong> Type the correct <strong>passive form</strong> of the verb in brackets (e.g. <em>is visited</em> / <em>was painted</em>). Then choose the matching picture letter. Small spelling mistakes are OK!
+  </div>
+
+  <div id="passiveSection">
+
+    <!-- Card 1 -->
+    <div class="passive-card" id="pc1">
+      <div class="num-badge num-1">1</div>
+      <div class="passive-content">
+        <div class="passive-sentence">The Louvre … <span class="verb-hint">(visit)</span> by approximately 15,000 people every day.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa1" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi1"></span>
+          <span class="feedback-msg" id="fm1"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm1" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi1"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="passive-card" id="pc2">
+      <div class="num-badge num-2">2</div>
+      <div class="passive-content">
+        <div class="passive-sentence">3D street art is a modern type of art that … <span class="verb-hint">(paint)</span> on city streets.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa2" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi2"></span>
+          <span class="feedback-msg" id="fm2"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm2" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi2"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="passive-card" id="pc3">
+      <div class="num-badge num-3">3</div>
+      <div class="passive-content">
+        <div class="passive-sentence">The world's oldest work of art, cave paintings, … <span class="verb-hint">(create)</span> around 45,000 years ago.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa3" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi3"></span>
+          <span class="feedback-msg" id="fm3"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm3" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi3"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="passive-card" id="pc4">
+      <div class="num-badge num-4">4</div>
+      <div class="passive-content">
+        <div class="passive-sentence">In 1886, a new method of painting only with dots … <span class="verb-hint">(invent)</span>.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa4" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi4"></span>
+          <span class="feedback-msg" id="fm4"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm4" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi4"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="passive-card" id="pc5">
+      <div class="num-badge num-5">5</div>
+      <div class="passive-content">
+        <div class="passive-sentence">Around the year 1500, a painting by Leonardo da Vinci … <span class="verb-hint">(sell)</span> for a price that is equal to $450 million today.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa5" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi5"></span>
+          <span class="feedback-msg" id="fm5"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm5" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi5"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="passive-card" id="pc6">
+      <div class="num-badge num-6">6</div>
+      <div class="passive-content">
+        <div class="passive-sentence">Women … <span class="verb-hint">(accept)</span> in art schools in Europe from the 19th century.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa6" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi6"></span>
+          <span class="feedback-msg" id="fm6"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm6" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi6"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="passive-card" id="pc7">
+      <div class="num-badge num-7">7</div>
+      <div class="passive-content">
+        <div class="passive-sentence">Bridget Riley's most famous painting consists only of black and white squares and … <span class="verb-hint">(call)</span> <em>Movement in Squares</em>.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa7" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi7"></span>
+          <span class="feedback-msg" id="fm7"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm7" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi7"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="passive-card" id="pc8">
+      <div class="num-badge num-8">8</div>
+      <div class="passive-content">
+        <div class="passive-sentence">A two-meter tall and 2,000-year-old statue of Augustus Caesar … <span class="verb-hint">(discover)</span> in Rome in 1863.</div>
+        <div class="answer-row">
+          <input type="text" class="answer-input" id="pa8" placeholder="Type the passive form…" oninput="G_savePassive()">
+          <span class="feedback-icon" id="fi8"></span>
+          <span class="feedback-msg" id="fm8"></span>
+        </div>
+        <div class="match-row">
+          <span class="match-label">📷 Match picture:</span>
+          <select class="match-select" id="pm8" onchange="G_savePassive()">
+            <option value="">— choose —</option>
+            <option>a</option><option>b</option><option>c</option><option>d</option>
+            <option>e</option><option>f</option><option>g</option><option>h</option>
+          </select>
+          <span class="feedback-icon" id="mfi8"></span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end passiveSection -->
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="G_checkPassive()">✔️ Check My Answers</button>
+    <button class="btn btn-retry" onclick="G_retryPassive()">🔄 Try Again</button>
+    <button class="btn btn-score" id="showScoreBtn" onclick="G_showFinalScore()">🏆 Show My Score</button>
+  </div>
+
+  <!-- ══════════ DIVIDER ══════════ -->
+  <div class="section-divider"></div>
+
+  <!-- ══════════ PART B: LANDMARKS ══════════ -->
+  <div class="section-header">
+    <div class="section-icon" style="background:linear-gradient(135deg,#1565C0,#1976D2);">🏛️</div>
+    <div>
+      <h2>Part B – Famous Landmarks Quiz</h2>
+      <p>Choose the correct answer for each question about world-famous landmarks.</p>
+    </div>
+  </div>
+
+  <div class="instruction-box" style="border-left-color:#1565C0;">
+    <strong>📝 How to answer:</strong> Read each question carefully. Click on the answer you think is correct. You can change your answer before checking.
+  </div>
+
+  <div id="landmarkSection">
+
+    <!-- Q1 -->
+    <div class="landmark-card" id="lc1">
+      <div class="landmark-top">
+        <div class="landmark-q-num">1</div>
+        <div class="landmark-q-body">
+          <div class="landmark-question">
+            Which of the following <span class="kw">sites</span> is <span class="kw">known as</span> a place where people came to watch <span class="kw">battles</span>?
+          </div>
+          <div class="landmark-options">
+            <label class="landmark-option" id="l1a" onclick="G_selectOption(1,'a')">
+              <input type="radio" name="lq1" value="a">
+              <span class="option-letter">a</span> the Golden Gate Bridge in San Francisco
+            </label>
+            <label class="landmark-option" id="l1b" onclick="G_selectOption(1,'b')">
+              <input type="radio" name="lq1" value="b">
+              <span class="option-letter">b</span> the Parthenon in Athens
+            </label>
+            <label class="landmark-option" id="l1c" onclick="G_selectOption(1,'c')">
+              <input type="radio" name="lq1" value="c">
+              <span class="option-letter">c</span> the Colosseum in Rome
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="landmark-images">
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/320px-GoldenGateBridge-001.jpg" alt="Golden Gate Bridge" onerror="this.src='https://via.placeholder.com/200x90?text=A'">
+          <div class="img-label">A</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/The_Parthenon_in_Athens.jpg/320px-The_Parthenon_in_Athens.jpg" alt="Parthenon" onerror="this.src='https://via.placeholder.com/200x90?text=B'">
+          <div class="img-label">B</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/320px-Colosseo_2020.jpg" alt="Colosseum" onerror="this.src='https://via.placeholder.com/200x90?text=C'">
+          <div class="img-label">C</div>
+        </div>
+      </div>
+      <div class="landmark-feedback" id="lf1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="landmark-card" id="lc2">
+      <div class="landmark-top">
+        <div class="landmark-q-num">2</div>
+        <div class="landmark-q-body">
+          <div class="landmark-question">
+            The <span class="kw">architects aimed to</span> make this building look like a flower. Which one is it?
+          </div>
+          <div class="landmark-options">
+            <label class="landmark-option" id="l2a" onclick="G_selectOption(2,'a')">
+              <input type="radio" name="lq2" value="a">
+              <span class="option-letter">a</span> Washington Memorial in Washington, D.C.
+            </label>
+            <label class="landmark-option" id="l2b" onclick="G_selectOption(2,'b')">
+              <input type="radio" name="lq2" value="b">
+              <span class="option-letter">b</span> Lotus Temple in New Delhi
+            </label>
+            <label class="landmark-option" id="l2c" onclick="G_selectOption(2,'c')">
+              <input type="radio" name="lq2" value="c">
+              <span class="option-letter">c</span> Masada in the Judaean Desert
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="landmark-images">
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Washington_Monument_Dusk_Jan_2006.jpg/200px-Washington_Monument_Dusk_Jan_2006.jpg" alt="Washington Memorial" onerror="this.src='https://via.placeholder.com/200x90?text=A'">
+          <div class="img-label">A</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Lotus_Temple_in_New_Delhi_03-2016.jpg/320px-Lotus_Temple_in_New_Delhi_03-2016.jpg" alt="Lotus Temple" onerror="this.src='https://via.placeholder.com/200x90?text=B'">
+          <div class="img-label">B</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Masada_aerial2.jpg/320px-Masada_aerial2.jpg" alt="Masada" onerror="this.src='https://via.placeholder.com/200x90?text=C'">
+          <div class="img-label">C</div>
+        </div>
+      </div>
+      <div class="landmark-feedback" id="lf2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="landmark-card" id="lc3">
+      <div class="landmark-top">
+        <div class="landmark-q-num">3</div>
+        <div class="landmark-q-body">
+          <div class="landmark-question">
+            Which of these towers has round <span class="kw">edges</span>?
+          </div>
+          <div class="landmark-options">
+            <label class="landmark-option" id="l3a" onclick="G_selectOption(3,'a')">
+              <input type="radio" name="lq3" value="a">
+              <span class="option-letter">a</span> the Leaning Tower of Pisa
+            </label>
+            <label class="landmark-option" id="l3b" onclick="G_selectOption(3,'b')">
+              <input type="radio" name="lq3" value="b">
+              <span class="option-letter">b</span> the Eiffel Tower in Paris
+            </label>
+            <label class="landmark-option" id="l3c" onclick="G_selectOption(3,'c')">
+              <input type="radio" name="lq3" value="c">
+              <span class="option-letter">c</span> the Big Ben Tower in London
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="landmark-images">
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Leaning_tower_of_pisa_2014.jpg/200px-Leaning_tower_of_pisa_2014.jpg" alt="Pisa" onerror="this.src='https://via.placeholder.com/200x90?text=A'">
+          <div class="img-label">A</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/200px-Tour_Eiffel_Wikimedia_Commons.jpg" alt="Eiffel Tower" onerror="this.src='https://via.placeholder.com/200x90?text=B'">
+          <div class="img-label">B</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Big_Ben%2C_London.jpg/200px-Big_Ben%2C_London.jpg" alt="Big Ben" onerror="this.src='https://via.placeholder.com/200x90?text=C'">
+          <div class="img-label">C</div>
+        </div>
+      </div>
+      <div class="landmark-feedback" id="lf3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="landmark-card" id="lc4">
+      <div class="landmark-top">
+        <div class="landmark-q-num">4</div>
+        <div class="landmark-q-body">
+          <div class="landmark-question">
+            Which of the following buildings was <span class="kw">constructed</span> in <span class="kw">honor</span> of soldiers who died fighting for their country?
+          </div>
+          <div class="landmark-options">
+            <label class="landmark-option" id="l4a" onclick="G_selectOption(4,'a')">
+              <input type="radio" name="lq4" value="a">
+              <span class="option-letter">a</span> the Great Wall of China
+            </label>
+            <label class="landmark-option" id="l4b" onclick="G_selectOption(4,'b')">
+              <input type="radio" name="lq4" value="b">
+              <span class="option-letter">b</span> the Arc de Triomphe in Paris
+            </label>
+            <label class="landmark-option" id="l4c" onclick="G_selectOption(4,'c')">
+              <input type="radio" name="lq4" value="c">
+              <span class="option-letter">c</span> the Sydney Opera House
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="landmark-images">
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/320px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg" alt="Great Wall" onerror="this.src='https://via.placeholder.com/200x90?text=A'">
+          <div class="img-label">A</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Arc_de_Triomphe%2C_Paris_21_October_2010.jpg/320px-Arc_de_Triomphe%2C_Paris_21_October_2010.jpg" alt="Arc de Triomphe" onerror="this.src='https://via.placeholder.com/200x90?text=B'">
+          <div class="img-label">B</div>
+        </div>
+        <div class="landmark-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sydney_Opera_House_-_Dec_2008.jpg/320px-Sydney_Opera_House_-_Dec_2008.jpg" alt="Sydney Opera House" onerror="this.src='https://via.placeholder.com/200x90?text=C'">
+          <div class="img-label">C</div>
+        </div>
+      </div>
+      <div class="landmark-feedback" id="lf4"></div>
+    </div>
+
+  </div><!-- end landmarkSection -->
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="G_checkLandmarks()">✔️ Check My Answers</button>
+    <button class="btn btn-retry" onclick="G_retryLandmarks()">🔄 Try Again</button>
+    <button class="btn btn-score" id="showScoreBtn2" onclick="G_showFinalScore()">🏆 Show My Score</button>
+  </div>
+
+  <!-- ══════════ SCORE PANEL ══════════ -->
+  <div class="score-panel" id="scorePanel">
+    <div style="font-size:2.5rem;">🎓</div>
+    <h3>Your Final Score</h3>
+    <div class="score-big" id="scoreBig">—</div>
+    <div class="score-details" id="scoreDetails"></div>
+    <div style="margin-top:16px;font-size:1.4rem;" id="scoreEmoji"></div>
+  </div>
+
+
+  </div>
+</div>
+
+<div class="main-panel" id="vocab">
+  <div class="vocab-tab-bar">
+    <button class="tab-btn active" onclick="showTab('t1',this)">🔤 Translation</button>
+    <button class="tab-btn" onclick="showTab('t2',this)">🔗 Match Lists</button>
+    <button class="tab-btn" onclick="showTab('t3',this)">🧩 Puzzle</button>
+    <button class="tab-btn" onclick="showTab('t4',this)">💬 Dialogues</button>
+    <button class="tab-btn" onclick="showTab('t5',this)">🔀 Sentence Match</button>
+    <button class="tab-btn" onclick="showTab('t6',this)">✏️ Fill in Blanks</button>
+  </div>
+  <div class="container">
+
+
+<!-- ══ TAB 1: TRANSLATION ══ -->
+<div class="tab-panel" id="t1">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:linear-gradient(135deg,#7B1FA2,#9C27B0);">🔤</div>
+    <div><h2>Translation</h2><p>Write the Hebrew meaning of each word.</p></div>
+  </div>
+  <div class="inst"><strong>📝 הוראות:</strong> כתבו את המשמעות בעברית. אפשר להיעזר בבנק המילים. שגיאות כתיב קלות לא ייחשבו!</div>
+
+  <div style="font-weight:800;font-size:.83rem;color:#555;margin-bottom:7px;">💡 בנק מילים:</div>
+  <div class="wb-wrap">
+    <span class="wb-tag">לשאוף ל-</span><span class="wb-tag">אדריכל</span><span class="wb-tag">קרב</span>
+    <span class="wb-tag">לשלב</span><span class="wb-tag">קצה / חוף</span><span class="wb-tag">לברך</span>
+    <span class="wb-tag">יש משותף</span><span class="wb-tag">ארמון</span><span class="wb-tag">נמל</span>
+    <span class="wb-tag">אתר</span><span class="wb-tag">עתיק</span><span class="wb-tag">אדריכלות</span>
+    <span class="wb-tag">להחשיב כ-</span><span class="wb-tag">צוות</span><span class="wb-tag">חופש</span>
+    <span class="wb-tag">כבוד</span><span class="wb-tag">ידוע כ-</span><span class="wb-tag">תוכנית</span>
+    <span class="wb-tag">נסיך</span><span class="wb-tag">פסל</span><span class="wb-tag">יום שנה</span>
+    <span class="wb-tag">בסיס</span><span class="wb-tag">שרשרת</span><span class="wb-tag">לבנות</span>
+    <span class="wb-tag">כתר</span><span class="wb-tag">ללדת</span><span class="wb-tag">עצמאות</span>
+    <span class="wb-tag">שירה</span><span class="wb-tag">תהליך</span><span class="wb-tag">מגדל</span>
+  </div>
+
+  <div class="word-grid" id="transGrid"></div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkT1()">✔️ Check</button>
+    <button class="btn btn-retry" onclick="retryT1()">🔄 Try Again</button>
+    <button class="btn btn-score" id="t1sb" onclick="showScore('t1Score','t1ScoreBig','t1ScoreSub',calcT1(),'#7B1FA2')">🏆 Score</button>
+  </div>
+  <div class="score-panel" id="t1Score"><h3>Translation Score</h3><div class="score-big" id="t1ScoreBig" style="color:#7B1FA2;"></div><div class="score-sub" id="t1ScoreSub"></div></div>
+</div>
+
+<!-- ══ TAB 2: MATCH ══ -->
+<div class="tab-panel" id="t2">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:linear-gradient(135deg,#00796B,#009688);">🔗</div>
+    <div><h2>Match the Words</h2><p>Match each English word to its Hebrew meaning.</p></div>
+  </div>
+  <div class="inst" style="border-left-color:#009688;"><strong>📝 Instructions:</strong> Choose the correct Hebrew definition for each word.</div>
+  <div id="matchContainer"></div>
+  <div class="btn-row">
+    <button class="btn btn-check" style="background:linear-gradient(135deg,#00796B,#009688);" onclick="checkT2()">✔️ Check</button>
+    <button class="btn btn-retry" onclick="retryT2()">🔄 Try Again</button>
+    <button class="btn btn-score" id="t2sb" onclick="showScore('t2Score','t2ScoreBig','t2ScoreSub',calcT2(),'#009688')">🏆 Score</button>
+  </div>
+  <div class="score-panel" id="t2Score"><h3>Match Score</h3><div class="score-big" id="t2ScoreBig" style="color:#009688;"></div><div class="score-sub" id="t2ScoreSub"></div></div>
+</div>
+
+<!-- ══ TAB 3: PUZZLE ══ -->
+<div class="tab-panel" id="t3">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:linear-gradient(135deg,#C2185B,#E91E63);">🧩</div>
+    <div><h2>Word Puzzle</h2><p>Write the correct word next to each definition.</p></div>
+  </div>
+  <div class="inst" style="border-left-color:#C2185B;"><strong>📝 Instructions:</strong> Write the correct word next to its definition. Use the word bank.</div>
+
+  <div style="font-weight:800;font-size:.83rem;color:#555;margin-bottom:7px;">📦 Word Bank:</div>
+  <div class="wb-wrap" style="margin-bottom:18px;">
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">ancient</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">battle</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">crown</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">greet</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">honor</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">palace</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">poetry</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">process</span>
+    <span class="wb-tag" style="background:#FFE4EF;color:#C2185B;border-color:#F48FB1;">site</span>
+  </div>
+
+  <div id="clueList"></div>
+
+  <div class="hw-row">
+    <strong>❓ Who designs buildings? An</strong>
+    <input class="hw-inp" id="hw_ans" placeholder="type the word…" oninput="save('hw',this.value)">
+    <span id="hw_fb"></span>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" style="background:linear-gradient(135deg,#C2185B,#E91E63);" onclick="checkT3()">✔️ Check</button>
+    <button class="btn btn-retry" onclick="retryT3()">🔄 Try Again</button>
+    <button class="btn btn-score" id="t3sb" onclick="showScore('t3Score','t3ScoreBig','t3ScoreSub',calcT3(),'#C2185B')">🏆 Score</button>
+  </div>
+  <div class="score-panel" id="t3Score"><h3>Puzzle Score</h3><div class="score-big" id="t3ScoreBig" style="color:#C2185B;"></div><div class="score-sub" id="t3ScoreSub"></div></div>
+</div>
+
+<!-- ══ TAB 4: DIALOGUES ══ -->
+<div class="tab-panel" id="t4">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:linear-gradient(135deg,#E65100,#FF6D00);">💬</div>
+    <div><h2>Dialogue Choices</h2><p>Click the correct word to complete each dialogue.</p></div>
+  </div>
+  <div class="inst" style="border-left-color:#E65100;"><strong>📝 Instructions:</strong> Read each dialogue and click the correct word in italics.</div>
+  <div id="dialList"></div>
+  <div class="btn-row">
+    <button class="btn btn-check" style="background:linear-gradient(135deg,#E65100,#FF6D00);" onclick="checkT4()">✔️ Check</button>
+    <button class="btn btn-retry" onclick="retryT4()">🔄 Try Again</button>
+    <button class="btn btn-score" id="t4sb" onclick="showScore('t4Score','t4ScoreBig','t4ScoreSub',calcT4(),'#E65100')">🏆 Score</button>
+  </div>
+  <div class="score-panel" id="t4Score"><h3>Dialogue Score</h3><div class="score-big" id="t4ScoreBig" style="color:#E65100;"></div><div class="score-sub" id="t4ScoreSub"></div></div>
+</div>
+
+<!-- ══ TAB 5: SENTENCE MATCH ══ -->
+<div class="tab-panel" id="t5">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:linear-gradient(135deg,#1565C0,#1976D2);">🔀</div>
+    <div><h2>Match A to B</h2><p>Match each sentence beginning to its correct ending.</p></div>
+  </div>
+  <div class="inst" style="border-left-color:#1565C0;"><strong>📝 Instructions:</strong> Choose the correct letter from column B for each sentence in column A.</div>
+  <div id="sentContainer"></div>
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkT5()">✔️ Check</button>
+    <button class="btn btn-retry" onclick="retryT5()">🔄 Try Again</button>
+    <button class="btn btn-score" id="t5sb" onclick="showScore('t5Score','t5ScoreBig','t5ScoreSub',calcT5(),'#1565C0')">🏆 Score</button>
+  </div>
+  <div class="score-panel" id="t5Score"><h3>Sentence Match Score</h3><div class="score-big" id="t5ScoreBig" style="color:#1565C0;"></div><div class="score-sub" id="t5ScoreSub"></div></div>
+</div>
+
+<!-- ══ TAB 6: FILL ══ -->
+<div class="tab-panel" id="t6">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:linear-gradient(135deg,#00796B,#009688);">✏️</div>
+    <div><h2>Fill in the Blanks</h2><p>Complete each sentence. Two extra words.</p></div>
+  </div>
+  <div class="inst" style="border-left-color:#00796B;"><strong>📝 Instructions:</strong> Use the words from the box. Make any necessary changes. Two words will NOT be used.</div>
+  <div class="fill-bank">
+    <strong>📦 Word box:</strong>
+    <div class="bwords">
+      <span class="bw">aim to</span><span class="bw">combine</span><span class="bw">construct</span>
+      <span class="bw">crew</span><span class="bw">crown</span><span class="bw">greet</span>
+      <span class="bw">honor</span><span class="bw">known as</span><span class="bw">port</span><span class="bw">tower</span>
+    </div>
+  </div>
+  <div id="fillList"></div>
+  <div class="btn-row">
+    <button class="btn btn-check" style="background:linear-gradient(135deg,#00796B,#009688);" onclick="checkT6()">✔️ Check</button>
+    <button class="btn btn-retry" onclick="retryT6()">🔄 Try Again</button>
+    <button class="btn btn-score" id="t6sb" onclick="showScore('t6Score','t6ScoreBig','t6ScoreSub',calcT6(),'#009688')">🏆 Score</button>
+  </div>
+  <div class="score-panel" id="t6Score"><h3>Fill in the Blanks Score</h3><div class="score-big" id="t6ScoreBig" style="color:#009688;"></div><div class="score-sub" id="t6ScoreSub"></div></div>
+</div>
+  </div>
+</div>
+
+<script>
+function showMain(id,btn){
+  document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.main-nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  const d=JSON.parse(localStorage.getItem('unitMeta')||'{}');
+  d.mainTab=id;localStorage.setItem('unitMeta',JSON.stringify(d));
+}
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById(id);if(el)el.classList.add('active');
+  btn.classList.add('active');
+  const d=JSON.parse(localStorage.getItem('unitMeta')||'{}');
+  d.vocabTab=id;localStorage.setItem('unitMeta',JSON.stringify(d));
+}
+
+
+// ══════════════════════════════════════════════
+//  ANSWER KEYS
+// ══════════════════════════════════════════════
+const passiveAnswers = {
+  1: { verb: ['is visited'], pic: 'h' },
+  2: { verb: ['is painted'], pic: 'e' },
+  3: { verb: ['were created'], pic: 'b' },
+  4: { verb: ['was invented'], pic: 'c' },
+  5: { verb: ['was sold'], pic: 'd' },
+  6: { verb: ['were accepted'], pic: 'f' },
+  7: { verb: ['is called'], pic: 'a' },
+  8: { verb: ['was discovered'], pic: 'g' },
+};
+
+const landmarkAnswers = { 1: 'c', 2: 'b', 3: 'b', 4: 'b' };
+
+// ══════════════════════════════════════════════
+//  FUZZY MATCH (allows minor spelling mistakes)
+// ══════════════════════════════════════════════
+function G_normalize(str) {
+  return str.toLowerCase().trim().replace(/\s+/g,' ').replace(/[^a-z ]/g,'');
+}
+
+function G_levenshtein(a, b) {
+  const dp = Array.from({length: a.length+1}, (_,i) =>
+    Array.from({length: b.length+1}, (_,j) => i === 0 ? j : j === 0 ? i : 0)
+  );
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] :
+        1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return dp[a.length][b.length];
+}
+
+function G_fuzzyMatch(input, accepted) {
+  const ni = G_normalize(input);
+  for (const ans of accepted) {
+    const na = G_normalize(ans);
+    if (ni === na) return true;
+    // Allow up to 2 edits for answers ≥8 chars, 1 for shorter
+    const threshold = na.length >= 8 ? 2 : 1;
+    if (G_levenshtein(ni, na) <= threshold) return true;
+  }
+  return false;
+}
+
+// ══════════════════════════════════════════════
+//  LOCAL STORAGE
+// ══════════════════════════════════════════════
+const LS_KEY = 'artQuiz_grade9_v2';
+
+function G_savePassive() {
+  const data = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+  for (let i = 1; i <= 8; i++) {
+    const inp = document.getElementById('pa'+i);
+    const sel = document.getElementById('pm'+i);
+    if (inp) data['pa'+i] = inp.value;
+    if (sel) data['pm'+i] = sel.value;
+  }
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+}
+
+function G_saveLandmark() {
+  const data = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+  for (let q = 1; q <= 4; q++) {
+    const checked = document.querySelector(`input[name="lq${q}"]:checked`);
+    data['lq'+q] = checked ? checked.value : '';
+  }
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+}
+
+function G_loadAll() {
+  const data = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+  for (let i = 1; i <= 8; i++) {
+    const inp = document.getElementById('pa'+i);
+    const sel = document.getElementById('pm'+i);
+    if (inp && data['pa'+i]) inp.value = data['pa'+i];
+    if (sel && data['pm'+i]) sel.value = data['pm'+i];
+  }
+  for (let q = 1; q <= 4; q++) {
+    if (data['lq'+q]) {
+      const opt = document.getElementById('l'+q+data['lq'+q]);
+      if (opt) {
+        opt.classList.add('selected');
+        const radio = opt.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      }
+    }
+  }
+}
+
+// ══════════════════════════════════════════════
+//  LANDMARK OPTION SELECTION
+// ══════════════════════════════════════════════
+const landmarkSelected = {};
+
+function G_selectOption(q, val) {
+  // Clear all options for this question
+  ['a','b','c'].forEach(v => {
+    const el = document.getElementById('l'+q+v);
+    if (el) el.classList.remove('selected');
+  });
+  const el = document.getElementById('l'+q+val);
+  if (el) el.classList.add('selected');
+  landmarkSelected[q] = val;
+  G_saveLandmark();
+}
+
+// ══════════════════════════════════════════════
+//  CHECK PASSIVE
+// ══════════════════════════════════════════════
+let passiveChecked = false;
+
+function G_checkPassive() {
+  let correct = 0, total = 0;
+  for (let i = 1; i <= 8; i++) {
+    const inp = document.getElementById('pa'+i);
+    const sel = document.getElementById('pm'+i);
+    const fi = document.getElementById('fi'+i);
+    const fm = document.getElementById('fm'+i);
+    const mfi = document.getElementById('mfi'+i);
+    const card = document.getElementById('pc'+i);
+    const ans = passiveAnswers[i];
+
+    // verb check
+    const verbOk = G_fuzzyMatch(inp.value, ans.verb);
+    inp.classList.remove('correct-input','wrong-input');
+    fi.style.display = 'inline';
+    fm.style.display = 'inline';
+    if (verbOk) {
+      inp.classList.add('correct-input');
+      fi.textContent = '✅';
+      fm.textContent = '';
+      fm.className = 'feedback-msg correct';
+      correct++;
+    } else {
+      inp.classList.add('wrong-input');
+      fi.textContent = '❌';
+      fm.textContent = '→ ' + ans.verb[0];
+      fm.className = 'feedback-msg wrong';
+      fm.style.display = 'inline';
+    }
+
+    // picture match check
+    const picOk = sel.value.trim() === ans.pic;
+    sel.classList.remove('correct-input','wrong-input');
+    mfi.style.display = 'inline';
+    if (sel.value) {
+      if (picOk) {
+        sel.classList.add('correct-input');
+        mfi.textContent = '✅';
+        correct++;
+      } else {
+        sel.classList.add('wrong-input');
+        mfi.textContent = '❌';
+      }
+    } else {
+      mfi.textContent = '';
+    }
+
+    total += 2;
+    card.classList.remove('correct','wrong');
+    card.classList.add(verbOk && picOk ? 'correct' : 'wrong');
+  }
+  passiveChecked = true;
+  G_checkShowScoreBtn();
+  G_updateSticky();
+}
+
+function G_retryPassive() {
+  for (let i = 1; i <= 8; i++) {
+    document.getElementById('pa'+i).value = '';
+    document.getElementById('pa'+i).classList.remove('correct-input','wrong-input');
+    document.getElementById('pm'+i).value = '';
+    document.getElementById('pm'+i).classList.remove('correct-input','wrong-input');
+    document.getElementById('fi'+i).style.display = 'none';
+    document.getElementById('fm'+i).style.display = 'none';
+    document.getElementById('mfi'+i).style.display = 'none';
+    document.getElementById('pc'+i).classList.remove('correct','wrong');
+  }
+  passiveChecked = false;
+  G_checkShowScoreBtn();
+  G_savePassive();
+}
+
+// ══════════════════════════════════════════════
+//  CHECK LANDMARKS
+// ══════════════════════════════════════════════
+let landmarkChecked = false;
+
+function G_checkLandmarks() {
+  for (let q = 1; q <= 4; q++) {
+    const correct = landmarkAnswers[q];
+    const chosen = landmarkSelected[q] || document.querySelector(`input[name="lq${q}"]:checked`)?.value;
+    const fb = document.getElementById('lf'+q);
+    const card = document.getElementById('lc'+q);
+
+    // Reset styles
+    ['a','b','c'].forEach(v => {
+      const el = document.getElementById('l'+q+v);
+      if (el) el.classList.remove('option-correct','option-wrong','selected');
+    });
+
+    if (!chosen) {
+      fb.className = 'landmark-feedback wrong';
+      fb.textContent = '⚠️ Please choose an answer!';
+      continue;
+    }
+
+    const correctEl = document.getElementById('l'+q+correct);
+    const chosenEl = document.getElementById('l'+q+chosen);
+
+    if (chosen === correct) {
+      if (correctEl) correctEl.classList.add('option-correct');
+      fb.className = 'landmark-feedback correct';
+      fb.textContent = '✅ Correct! Well done!';
+      card.classList.remove('wrong'); card.classList.add('correct');
+    } else {
+      if (chosenEl) chosenEl.classList.add('option-wrong');
+      if (correctEl) correctEl.classList.add('option-correct');
+      fb.className = 'landmark-feedback wrong';
+      fb.textContent = '❌ Not quite. The correct answer is highlighted in green.';
+      card.classList.remove('correct'); card.classList.add('wrong');
+    }
+  }
+  landmarkChecked = true;
+  G_checkShowScoreBtn();
+  G_updateSticky();
+}
+
+function G_retryLandmarks() {
+  for (let q = 1; q <= 4; q++) {
+    ['a','b','c'].forEach(v => {
+      const el = document.getElementById('l'+q+v);
+      if (el) el.classList.remove('option-correct','option-wrong','selected');
+      const radio = el?.querySelector('input[type="radio"]');
+      if (radio) radio.checked = false;
+    });
+    const fb = document.getElementById('lf'+q);
+    fb.className = 'landmark-feedback';
+    fb.textContent = '';
+    document.getElementById('lc'+q).classList.remove('correct','wrong');
+    delete landmarkSelected[q];
+  }
+  landmarkChecked = false;
+  G_checkShowScoreBtn();
+  G_saveLandmark();
+}
+
+// ══════════════════════════════════════════════
+//  SCORE CALCULATION
+// ══════════════════════════════════════════════
+function G_calcScore() {
+  let score = 0, total = 0;
+
+  // Passive: verb (1pt each) + picture (1pt each) = 16 pts
+  for (let i = 1; i <= 8; i++) {
+    const inp = document.getElementById('pa'+i);
+    const sel = document.getElementById('pm'+i);
+    if (G_fuzzyMatch(inp?.value || '', passiveAnswers[i].verb)) score++;
+    if ((sel?.value || '').trim() === passiveAnswers[i].pic) score++;
+    total += 2;
+  }
+
+  // Landmarks: 1pt each = 4 pts
+  for (let q = 1; q <= 4; q++) {
+    const chosen = landmarkSelected[q] || document.querySelector(`input[name="lq${q}"]:checked`)?.value;
+    if (chosen === landmarkAnswers[q]) score++;
+    total++;
+  }
+
+  return { score, total };
+}
+
+function G_updateSticky() {
+  const { score } = G_calcScore();
+  document.getElementById('stickyNum').textContent = score;
+  document.getElementById('stickyScore').style.display = 'flex';
+}
+
+function G_checkShowScoreBtn() {
+  const show = passiveChecked && landmarkChecked;
+  document.getElementById('showScoreBtn').style.display = show ? 'inline-block' : 'none';
+  document.getElementById('showScoreBtn2').style.display = show ? 'inline-block' : 'none';
+}
+
+function G_showFinalScore() {
+  const { score, total } = G_calcScore();
+  const pct = Math.round(score / total * 100);
+  const panel = document.getElementById('scorePanel');
+  panel.style.display = 'block';
+  document.getElementById('scoreBig').textContent = score + ' / ' + total;
+  document.getElementById('scoreDetails').textContent = pct + '% — ' +
+    (pct >= 90 ? 'Excellent work!' : pct >= 70 ? 'Good job! Keep it up.' : pct >= 50 ? 'Not bad! Review the answers above.' : 'Keep practising — you\'ve got this! 💪');
+  document.getElementById('scoreEmoji').textContent = pct >= 90 ? '🌟🌟🌟' : pct >= 70 ? '⭐⭐' : '⭐';
+  panel.scrollIntoView({ behavior: 'smooth' });
+  G_updateSticky();
+}
+
+function G_scrollToScore() {
+  const panel = document.getElementById('scorePanel');
+  if (panel.style.display === 'block') {
+    panel.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+
+
+// ═══════════════════════════════
+//  DATA
+// ═══════════════════════════════
+
+const transData = [
+  {id:'aim_to',      en:'aim to',          ans:['לשאוף','שאוף','לשאוף ל']},
+  {id:'architect',   en:'architect',        ans:['אדריכל','ארכיטקט']},
+  {id:'battle',      en:'battle',           ans:['קרב','מערכה']},
+  {id:'combine',     en:'combine',          ans:['לשלב','שלב','מיזג']},
+  {id:'edge',        en:'edge',             ans:['קצה','חוף','שפה']},
+  {id:'greet',       en:'greet',            ans:['לברך','ברך','לקבל']},
+  {id:'hic',         en:'have in common',   ans:['משותף','יש משותף','בשותף']},
+  {id:'palace',      en:'palace',           ans:['ארמון']},
+  {id:'port',        en:'port',             ans:['נמל']},
+  {id:'site',        en:'site',             ans:['אתר','מקום']},
+  {id:'ancient',     en:'ancient',          ans:['עתיק','ישן','קדום']},
+  {id:'architecture',en:'architecture',     ans:['אדריכלות','ארכיטקטורה']},
+  {id:'ctb',         en:'consider to be',   ans:['להחשיב','נחשב','לחשוב כ']},
+  {id:'crew',        en:'crew',             ans:['צוות']},
+  {id:'freedom',     en:'freedom',          ans:['חופש','חרות','עצמאות']},
+  {id:'honor',       en:'honor',            ans:['כבוד','הוקרה']},
+  {id:'known_as',    en:'known as',         ans:['ידוע','מוכר כ','ידועה']},
+  {id:'plan',        en:'plan',             ans:['תוכנית','תכנית','תרשים']},
+  {id:'prince',      en:'prince',           ans:['נסיך']},
+  {id:'statue',      en:'statue',           ans:['פסל']},
+  {id:'anniversary', en:'anniversary',      ans:['יום שנה','יובל','זיכרון']},
+  {id:'base',        en:'base',             ans:['בסיס','יסוד','תשתית']},
+  {id:'chain',       en:'chain',            ans:['שרשרת']},
+  {id:'construct',   en:'construct',        ans:['לבנות','בנה','בניה']},
+  {id:'crown',       en:'crown',            ans:['כתר']},
+  {id:'give_birth',  en:'give birth',       ans:['ללדת','לדת','הוליד']},
+  {id:'independence',en:'independence',     ans:['עצמאות','עצמאי']},
+  {id:'poetry',      en:'poetry',           ans:['שירה','שיר']},
+  {id:'process',     en:'process',          ans:['תהליך','פעולה']},
+  {id:'tower',       en:'tower',            ans:['מגדל']},
+];
+
+const matchGroups = [
+  {
+    title:'List 1',
+    color:'#009688',
+    items:[
+      {en:'aim to',         heb:'לשאוף ל-',    key:'b'},
+      {en:'architect',      heb:'אדריכל',       key:'h'},
+      {en:'battle',         heb:'קרב',          key:'d'},
+      {en:'combine',        heb:'לשלב',         key:'c'},
+      {en:'edge',           heb:'קצה / חפה',    key:'g'},
+      {en:'greet',          heb:'לברך לשלום',   key:'e'},
+      {en:'have in common', heb:'יש משותף',     key:'f'},
+      {en:'palace',         heb:'ארמון',        key:'a'},
+      {en:'port',           heb:'נמל',          key:'j'},
+      {en:'site',           heb:'אתר',          key:'i'},
+    ],
+    opts:['a. ארמון','b. לשאוף ל-','c. לשלב','d. קרב','e. לברך','f. יש משותף','g. קצה','h. אדריכל','i. אתר','j. נמל'],
+  },
+  {
+    title:'List 2',
+    color:'#7B1FA2',
+    items:[
+      {en:'ancient',        heb:'עתיק',         key:'d'},
+      {en:'architecture',   heb:'אדריכלות',     key:'f'},
+      {en:'consider to be', heb:'להחשיב כ-',    key:'j'},
+      {en:'crew',           heb:'צוות',         key:'i'},
+      {en:'freedom',        heb:'חופש',         key:'h'},
+      {en:'honor',          heb:'כבוד',         key:'b'},
+      {en:'known as',       heb:'ידוע בתור',    key:'a'},
+      {en:'plan',           heb:'תוכנית',       key:'c'},
+      {en:'prince',         heb:'נסיך',         key:'g'},
+      {en:'statue',         heb:'פסל',          key:'e'},
+    ],
+    opts:['a. ידוע בתור','b. כבוד','c. תוכנית','d. עתיק','e. פסל','f. אדריכלות','g. נסיך','h. חופש','i. צוות','j. להחשיב כ-'],
+  },
+  {
+    title:'List 3',
+    color:'#1565C0',
+    items:[
+      {en:'anniversary', heb:'יום שנה',  key:'h'},
+      {en:'base',        heb:'בסיס',     key:'c'},
+      {en:'chain',       heb:'שרשרת',    key:'b'},
+      {en:'construct',   heb:'לבנות',    key:'i'},
+      {en:'crown',       heb:'כתר',      key:'d'},
+      {en:'give birth',  heb:'ללדת',     key:'g'},
+      {en:'independence',heb:'עצמאות',   key:'f'},
+      {en:'poetry',      heb:'שירה',     key:'j'},
+      {en:'process',     heb:'תהליך',    key:'a'},
+      {en:'tower',       heb:'מגדל',     key:'e'},
+    ],
+    opts:['a. תהליך','b. שרשרת','c. בסיס','d. כתר','e. מגדל','f. עצמאות','g. ללדת','h. יום שנה','i. לבנות','j. שירה'],
+  },
+];
+
+const puzzleClues = [
+  {n:1, clue:'the home of kings and queens',         ans:'palace'},
+  {n:2, clue:'a series of actions',                  ans:'process'},
+  {n:3, clue:'very old',                             ans:'ancient'},
+  {n:4, clue:'giving respect',                       ans:'honor'},
+  {n:5, clue:'interesting place',                    ans:'site'},
+  {n:6, clue:'fight between armies',                 ans:'battle'},
+  {n:7, clue:'say hello to someone',                 ans:'greet'},
+  {n:8, clue:'a king or queen wears this on their heads', ans:'crown'},
+  {n:9, clue:'a type of literature',                 ans:'poetry'},
+];
+
+const dialogues = [
+  {id:1, kw:'freedom',      s1:'Nir: I wish our boss gave us more <b>freedom</b>.', s2:'Ronnie: Me too. Why doesn\'t he ___ / order us to work from home?', opts:['allow','order'], correct:'allow'},
+  {id:2, kw:'architecture', s1:'Bilal: That house has amazing <b>architecture</b>.', s2:'Nur: Personally, I don\'t like the ___ / furniture.', opts:['design','furniture'], correct:'design'},
+  {id:3, kw:'crew',         s1:'Sally: Did you meet any of the <b>crew</b> on the ship?', s2:'Maya: Yes. Some of the passengers / ___ said hello when I boarded.', opts:['passengers','staff'], correct:'staff'},
+  {id:4, kw:'prince',       s1:'Aya: Is that man on TV really a <b>prince</b>?', s2:'Amir: Yes. His father is ___ / a traveler in Sweden.', opts:['the king of','a traveler in'], correct:'the king of'},
+  {id:5, kw:'combine',      s1:'Paul: How did you <b>combine</b> the ingredients?', s2:'Tim: I used my hands to ___ / cook them.', opts:['mix','cook'], correct:'mix'},
+  {id:6, kw:'anniversary',  s1:'Ella: What are you doing for your <b>anniversary</b>?', s2:'Lee: We are traveling to London ___ / on business.', opts:['to celebrate','on business'], correct:'to celebrate'},
+  {id:7, kw:'base',         s1:'Adam: Why does a cheese cake need a <b>base</b>?', s2:'Yasmin: Because it has to ___ / cover the entire cake.', opts:['hold','cover'], correct:'hold'},
+  {id:8, kw:'have in common',s1:'Alex: What do you and your sister <b>have in common</b>?', s2:'Yana: Well, we have ___ / different eye and hair color.', opts:['the same','different'], correct:'the same'},
+];
+
+const sentGroups = [
+  {
+    title:'Group 1',
+    colB:{a:'is in the image of an angel.',b:'were drawn in pencil.',c:'and jumped in.',d:'we celebrate by having a picnic.',e:'to the building so no one could enter.'},
+    items:[
+      {n:1, text:'Every year on <b>Independence</b> Day,', ans:'d'},
+      {n:2, text:'The <b>plans</b> to the house', ans:'b'},
+      {n:3, text:'There was a <b>chain</b> at the entrance', ans:'e'},
+      {n:4, text:'Maggy stood at the <b>edge</b> of the pool', ans:'c'},
+      {n:5, text:'The <b>statue</b> in the park', ans:'a'},
+    ],
+    letters:['a','b','c','d','e'],
+  },
+  {
+    title:'Group 2',
+    colB:{a:'though it used to be called New Amsterdam.',b:'a six-month trip to India.',c:'by many ships all year long.',d:'since the builders worked very fast.',e:'and had a view of the whole city.',f:'but I think it has too much sugar.',g:'so now we have five new kittens.'},
+    items:[
+      {n:1, text:'Our house was <b>constructed</b> in a year', ans:'d'},
+      {n:2, text:'We went to the top of the <b>tower</b>', ans:'e'},
+      {n:3, text:'New York City is <b>known as</b> the Big Apple,', ans:'a'},
+      {n:4, text:'Fruit juice is <b>considered to be</b> healthy,', ans:'f'},
+      {n:5, text:'The <b>port</b> in Haifa is used', ans:'c'},
+      {n:6, text:'My cat just <b>gave birth</b>,', ans:'g'},
+      {n:7, text:'After college, I <b>aim to</b> take', ans:'b'},
+    ],
+    letters:['a','b','c','d','e','f','g'],
+  },
+];
+
+const fillItems = [
+  {n:1, before:'The ship was in the', after:'for a few weeks.', ans:['port']},
+  {n:2, before:'Before the plane took off, the', after:'made sure that all of the passengers were sitting in their seats.', ans:['crew']},
+  {n:3, before:'The king doesn\'t usually wear a', after:'. It\'s worn only on special occasions.', ans:['crown']},
+  {n:4, before:'Every year, Ruth competes in a race called a triathlon. It', after:'swimming, running, and bike riding.', ans:['combines','combine']},
+  {n:5, before:'Michael Jordan is widely', after:'the best basketball player of all times.', ans:['known as']},
+  {n:6, before:'You can see far into the distance from the top of the guard', after:'.', ans:['tower']},
+  {n:7, before:'My grandparents are arriving from Spain, so we plan to', after:'them at the airport.', ans:['greet']},
+  {n:8, before:'The Empire State Building was', after:'in the 1930s and took a little over a year to build.', ans:['constructed','construct']},
+];
+
+// ═══════════════════════════════
+//  FUZZY MATCH
+// ═══════════════════════════════
+function norm(s){
+  return s.toLowerCase().trim().replace(/\s+/g,' ').replace(/[^a-z\u05d0-\u05ea ]/g,'');
+}
+function lev(a,b){
+  const d=Array.from({length:a.length+1},(_,i)=>Array.from({length:b.length+1},(_,j)=>i===0?j:j===0?i:0));
+  for(let i=1;i<=a.length;i++) for(let j=1;j<=b.length;j++)
+    d[i][j]=a[i-1]===b[j-1]?d[i-1][j-1]:1+Math.min(d[i-1][j],d[i][j-1],d[i-1][j-1]);
+  return d[a.length][b.length];
+}
+function fuzzy(input,accepted){
+  const ni=norm(input);
+  if(!ni) return false;
+  for(const a of accepted){
+    const na=norm(a);
+    if(ni===na) return true;
+    if(na.length>=3 && ni.length>=3 && (na.includes(ni)||ni.includes(na))) return true;
+    if(lev(ni,na)<=Math.min(2,Math.floor(na.length/4))) return true;
+  }
+  return false;
+}
+
+// ═══════════════════════════════
+//  LOCAL STORAGE
+// ═══════════════════════════════
+const LS='vocabG9v3';
+function save(k,v){const d=JSON.parse(localStorage.getItem(LS)||'{}');d[k]=v;localStorage.setItem(LS,JSON.stringify(d));}
+function load(k,def){const d=JSON.parse(localStorage.getItem(LS)||'{}');return d[k]!==undefined?d[k]:def;}
+
+// ═══════════════════════════════
+//  BUILD UI
+// ═══════════════════════════════
+function buildAll(){
+  // T1
+  const tg=document.getElementById('transGrid');
+  const colors=['#4CAF50','#9C27B0','#FF9800','#009688','#2196F3','#E91E63','#795548','#607D8B','#F44336','#3F51B5'];
+  transData.forEach((w,i)=>{
+    const val=load('t1_'+w.id,'');
+    tg.innerHTML+=`<div class="word-card" id="wc_${w.id}">
+      <div class="word-num" style="background:${colors[i%10]}">${i+1}</div>
+      <div class="word-en">${w.en}</div>
+      <input class="trans-input" id="ti_${w.id}" value="${val}" placeholder="בעברית..." oninput="save('t1_${w.id}',this.value)">
+      <span class="wfb" id="wf_${w.id}"></span>
+    </div>`;
+  });
+
+  // T2
+  const mc=document.getElementById('matchContainer');
+  matchGroups.forEach((g,gi)=>{
+    let html=`<div class="group-wrap"><div class="group-title" style="color:${g.color}">📋 ${g.title}</div>`;
+    g.items.forEach((item,i)=>{
+      const val=load('t2_'+gi+'_'+i,'');
+      const opts=g.opts.map(o=>`<option value="${o[0]}"${val===o[0]?' selected':''}>${o}</option>`).join('');
+      html+=`<div class="match-pair" id="mp_${gi}_${i}">
+        <div class="match-num" style="background:${g.color}">${i+1}</div>
+        <div class="match-en">${item.en}</div>
+        <select class="match-sel" id="ms_${gi}_${i}" onchange="save('t2_${gi}_${i}',this.value)" dir="rtl">
+          <option value="">— בחרו —</option>${opts}
+        </select>
+        <span class="mfb" id="mf_${gi}_${i}"></span>
+      </div>`;
+    });
+    html+=`</div>`;
+    mc.innerHTML+=html;
+  });
+
+  // T3
+  const cl=document.getElementById('clueList');
+  puzzleClues.forEach(c=>{
+    const val=load('t3_'+c.n,'');
+    cl.innerHTML+=`<div class="clue-item" id="ci_${c.n}">
+      <span class="clue-num">${c.n}.</span>
+      <span class="clue-text">${c.clue}</span>
+      <input class="clue-inp" id="cinp_${c.n}" value="${val}" placeholder="type word…" oninput="save('t3_${c.n}',this.value)">
+      <span class="cfb" id="cfb_${c.n}"></span>
+    </div>`;
+  });
+  const hwval=load('hw','');
+  document.getElementById('hw_ans').value=hwval;
+
+  // T4
+  const dl=document.getElementById('dialList');
+  dialogues.forEach(d=>{
+    const sel=load('t4_'+d.id,'');
+    const opts=d.opts.map(o=>`<button class="choice-btn${sel===o?' sel':''}" id="db_${d.id}_${o.replace(/\s+/g,'_')}" onclick="selDial(${d.id},'${o}')">${o}</button>`).join('');
+    dl.innerHTML+=`<div class="dial-card" id="dc_${d.id}">
+      <div class="dial-num">Dialogue ${d.id}</div>
+      <div class="dial-line">${d.s1}</div>
+      <div class="dial-line">${d.s2}</div>
+      <div class="choice-row">${opts}</div>
+      <div class="dfb" id="dfb_${d.id}"></div>
+    </div>`;
+  });
+
+  // T5
+  const sc=document.getElementById('sentContainer');
+  sentGroups.forEach((g,gi)=>{
+    let bHtml=Object.entries(g.colB).map(([k,v])=>`<div class="b-item"><span>${k}.</span>${v}</div>`).join('');
+    let aHtml=g.items.map(it=>{
+      const val=load('t5_'+gi+'_'+it.n,'');
+      const opts=g.letters.map(l=>`<option value="${l}"${val===l?' selected':''}>${l}</option>`).join('');
+      return `<div class="sent-pair" id="sp_${gi}_${it.n}">
+        <div class="sent-num">${it.n}.</div>
+        <div class="sent-a">${it.text}</div>
+        <select class="sent-sel" id="ss_${gi}_${it.n}" onchange="save('t5_${gi}_${it.n}',this.value)">
+          <option value="">—</option>${opts}
+        </select>
+        <span class="sfb" id="sf_${gi}_${it.n}"></span>
+      </div>`;
+    }).join('');
+    sc.innerHTML+=`<div class="group-wrap">
+      <div class="group-title" style="color:#1565C0;">📋 ${g.title}</div>
+      <div class="b-box"><h4>Column B:</h4>${bHtml}</div>
+      ${aHtml}
+    </div>`;
+  });
+
+  // T6
+  const fl=document.getElementById('fillList');
+  fillItems.forEach(fi=>{
+    const val=load('t6_'+fi.n,'');
+    fl.innerHTML+=`<div class="fill-card" id="fc_${fi.n}">
+      <div class="fill-num">${fi.n}</div>
+      <div>
+        <div class="fill-sent">${fi.before} <input class="fill-inp" id="fi_${fi.n}" value="${val}" placeholder="…" oninput="save('t6_${fi.n}',this.value)"> ${fi.after}</div>
+        <div class="ffb" id="ff_${fi.n}"></div>
+      </div>
+    </div>`;
+  });
+}
+
+// ═══════════════════════════════
+//  DIALOGUE SELECTION
+// ═══════════════════════════════
+function selDial(id,val){
+  dialogues.find(d=>d.id===id).opts.forEach(o=>{
+    const btn=document.getElementById('db_'+id+'_'+o.replace(/\s+/g,'_'));
+    if(btn) btn.classList.toggle('sel',o===val);
+  });
+  save('t4_'+id,val);
+}
+
+// ═══════════════════════════════
+//  CHECK FUNCTIONS
+// ═══════════════════════════════
+function checkT1(){
+  transData.forEach(w=>{
+    const el=document.getElementById('ti_'+w.id);
+    const fb=document.getElementById('wf_'+w.id);
+    const card=document.getElementById('wc_'+w.id);
+    const ok=el&&fuzzy(el.value,w.ans);
+    const has=el&&el.value.trim();
+    el&&el.classList.toggle('ok',ok);
+    el&&el.classList.toggle('err',!ok&&has);
+    card&&card.classList.toggle('correct',ok);
+    card&&card.classList.toggle('wrong',!ok&&has);
+    if(fb) fb.textContent=ok?'✅':has?'❌':'';
+  });
+  document.getElementById('t1sb').style.display='inline-block';
+}
+function retryT1(){
+  transData.forEach(w=>{
+    const el=document.getElementById('ti_'+w.id);
+    const fb=document.getElementById('wf_'+w.id);
+    const card=document.getElementById('wc_'+w.id);
+    if(el){el.value='';el.classList.remove('ok','err');}
+    if(fb) fb.textContent='';
+    if(card) card.classList.remove('correct','wrong');
+    save('t1_'+w.id,'');
+  });
+  document.getElementById('t1sb').style.display='none';
+  document.getElementById('t1Score').style.display='none';
+}
+function calcT1(){
+  let s=0,t=transData.length;
+  transData.forEach(w=>{const el=document.getElementById('ti_'+w.id);if(el&&fuzzy(el.value,w.ans))s++;});
+  return {s,t};
+}
+
+function checkT2(){
+  matchGroups.forEach((g,gi)=>{
+    g.items.forEach((item,i)=>{
+      const el=document.getElementById('ms_'+gi+'_'+i);
+      const pair=document.getElementById('mp_'+gi+'_'+i);
+      const fb=document.getElementById('mf_'+gi+'_'+i);
+      const ok=el&&el.value===item.key;
+      const has=el&&el.value;
+      el&&el.classList.toggle('ok',ok);
+      el&&el.classList.toggle('err',!ok&&has);
+      pair&&pair.classList.toggle('correct',ok);
+      pair&&pair.classList.toggle('wrong',!ok&&has);
+      if(fb) fb.textContent=ok?'✅':has?'❌':'';
+    });
+  });
+  document.getElementById('t2sb').style.display='inline-block';
+}
+function retryT2(){
+  matchGroups.forEach((g,gi)=>{
+    g.items.forEach((_,i)=>{
+      const el=document.getElementById('ms_'+gi+'_'+i);
+      const pair=document.getElementById('mp_'+gi+'_'+i);
+      const fb=document.getElementById('mf_'+gi+'_'+i);
+      if(el){el.value='';el.classList.remove('ok','err');}
+      if(pair) pair.classList.remove('correct','wrong');
+      if(fb) fb.textContent='';
+      save('t2_'+gi+'_'+i,'');
+    });
+  });
+  document.getElementById('t2sb').style.display='none';
+  document.getElementById('t2Score').style.display='none';
+}
+function calcT2(){
+  let s=0,t=0;
+  matchGroups.forEach((g,gi)=>{
+    g.items.forEach((item,i)=>{t++;const el=document.getElementById('ms_'+gi+'_'+i);if(el&&el.value===item.key)s++;});
+  });
+  return {s,t};
+}
+
+function checkT3(){
+  puzzleClues.forEach(c=>{
+    const el=document.getElementById('cinp_'+c.n);
+    const fb=document.getElementById('cfb_'+c.n);
+    const item=document.getElementById('ci_'+c.n);
+    const ok=el&&fuzzy(el.value,[c.ans]);
+    const has=el&&el.value.trim();
+    el&&el.classList.toggle('ok',ok);
+    el&&el.classList.toggle('err',!ok&&has);
+    item&&item.classList.toggle('correct',ok);
+    item&&item.classList.toggle('wrong',!ok&&has);
+    if(fb) fb.textContent=ok?'✅':has?'❌':'';
+  });
+  const hw=document.getElementById('hw_ans');
+  const hwfb=document.getElementById('hw_fb');
+  const hwok=hw&&fuzzy(hw.value,['architect']);
+  const hwhas=hw&&hw.value.trim();
+  hw&&hw.classList.toggle('ok',hwok);
+  hw&&hw.classList.toggle('err',!hwok&&hwhas);
+  if(hwfb) hwfb.textContent=hwok?'✅':hwhas?'❌':'';
+  document.getElementById('t3sb').style.display='inline-block';
+}
+function retryT3(){
+  puzzleClues.forEach(c=>{
+    const el=document.getElementById('cinp_'+c.n);
+    const fb=document.getElementById('cfb_'+c.n);
+    const item=document.getElementById('ci_'+c.n);
+    if(el){el.value='';el.classList.remove('ok','err');}
+    if(fb) fb.textContent='';
+    if(item) item.classList.remove('correct','wrong');
+    save('t3_'+c.n,'');
+  });
+  const hw=document.getElementById('hw_ans');
+  if(hw){hw.value='';hw.classList.remove('ok','err');}
+  document.getElementById('hw_fb').textContent='';
+  document.getElementById('t3sb').style.display='none';
+  document.getElementById('t3Score').style.display='none';
+  save('hw','');
+}
+function calcT3(){
+  let s=0,t=puzzleClues.length+1;
+  puzzleClues.forEach(c=>{const el=document.getElementById('cinp_'+c.n);if(el&&fuzzy(el.value,[c.ans]))s++;});
+  const hw=document.getElementById('hw_ans');if(hw&&fuzzy(hw.value,['architect']))s++;
+  return {s,t};
+}
+
+function checkT4(){
+  dialogues.forEach(d=>{
+    const sel=load('t4_'+d.id,'');
+    const ok=sel===d.correct;
+    const has=!!sel;
+    const card=document.getElementById('dc_'+d.id);
+    const fb=document.getElementById('dfb_'+d.id);
+    d.opts.forEach(o=>{
+      const btn=document.getElementById('db_'+d.id+'_'+o.replace(/\s+/g,'_'));
+      if(!btn) return;
+      btn.classList.remove('opt-ok','opt-err','sel');
+      if(o===d.correct&&has) btn.classList.add('opt-ok');
+      else if(o===sel&&!ok) btn.classList.add('opt-err');
+    });
+    if(card){card.classList.toggle('correct',ok&&has);card.classList.toggle('wrong',!ok&&has);}
+    if(fb){
+      fb.className='dfb'+(has?' show':'')+(ok?' correct':' wrong');
+      fb.textContent=ok&&has?'✅ Correct!':has?'❌ The answer is: "'+d.correct+'"':'';
+    }
+  });
+  document.getElementById('t4sb').style.display='inline-block';
+}
+function retryT4(){
+  dialogues.forEach(d=>{
+    d.opts.forEach(o=>{
+      const btn=document.getElementById('db_'+d.id+'_'+o.replace(/\s+/g,'_'));
+      if(btn) btn.classList.remove('opt-ok','opt-err','sel');
+    });
+    const card=document.getElementById('dc_'+d.id);
+    const fb=document.getElementById('dfb_'+d.id);
+    if(card) card.classList.remove('correct','wrong');
+    if(fb){fb.className='dfb';fb.textContent='';}
+    save('t4_'+d.id,'');
+  });
+  document.getElementById('t4sb').style.display='none';
+  document.getElementById('t4Score').style.display='none';
+}
+function calcT4(){
+  let s=0,t=dialogues.length;
+  dialogues.forEach(d=>{if(load('t4_'+d.id,'')===d.correct)s++;});
+  return {s,t};
+}
+
+function checkT5(){
+  sentGroups.forEach((g,gi)=>{
+    g.items.forEach(it=>{
+      const el=document.getElementById('ss_'+gi+'_'+it.n);
+      const pair=document.getElementById('sp_'+gi+'_'+it.n);
+      const fb=document.getElementById('sf_'+gi+'_'+it.n);
+      const ok=el&&el.value===it.ans;
+      const has=el&&el.value;
+      el&&el.classList.toggle('ok',ok);
+      el&&el.classList.toggle('err',!ok&&has);
+      pair&&pair.classList.toggle('correct',ok);
+      pair&&pair.classList.toggle('wrong',!ok&&has);
+      if(fb) fb.textContent=ok?'✅':has?'❌':'';
+    });
+  });
+  document.getElementById('t5sb').style.display='inline-block';
+}
+function retryT5(){
+  sentGroups.forEach((g,gi)=>{
+    g.items.forEach(it=>{
+      const el=document.getElementById('ss_'+gi+'_'+it.n);
+      const pair=document.getElementById('sp_'+gi+'_'+it.n);
+      const fb=document.getElementById('sf_'+gi+'_'+it.n);
+      if(el){el.value='';el.classList.remove('ok','err');}
+      if(pair) pair.classList.remove('correct','wrong');
+      if(fb) fb.textContent='';
+      save('t5_'+gi+'_'+it.n,'');
+    });
+  });
+  document.getElementById('t5sb').style.display='none';
+  document.getElementById('t5Score').style.display='none';
+}
+function calcT5(){
+  let s=0,t=0;
+  sentGroups.forEach((g,gi)=>{g.items.forEach(it=>{t++;const el=document.getElementById('ss_'+gi+'_'+it.n);if(el&&el.value===it.ans)s++;});});
+  return {s,t};
+}
+
+function checkT6(){
+  fillItems.forEach(fi=>{
+    const el=document.getElementById('fi_'+fi.n);
+    const card=document.getElementById('fc_'+fi.n);
+    const fb=document.getElementById('ff_'+fi.n);
+    const ok=el&&fuzzy(el.value,fi.ans);
+    const has=el&&el.value.trim();
+    el&&el.classList.toggle('ok',ok);
+    el&&el.classList.toggle('err',!ok&&has);
+    card&&card.classList.toggle('correct',ok);
+    card&&card.classList.toggle('wrong',!ok&&has);
+    if(fb){fb.className='ffb'+(has?' show':'')+(ok?' correct':' wrong');fb.textContent=ok?'✅ Correct!':has?'❌ Try again!':'';}
+  });
+  document.getElementById('t6sb').style.display='inline-block';
+}
+function retryT6(){
+  fillItems.forEach(fi=>{
+    const el=document.getElementById('fi_'+fi.n);
+    const card=document.getElementById('fc_'+fi.n);
+    const fb=document.getElementById('ff_'+fi.n);
+    if(el){el.value='';el.classList.remove('ok','err');}
+    if(card) card.classList.remove('correct','wrong');
+    if(fb){fb.className='ffb';fb.textContent='';}
+    save('t6_'+fi.n,'');
+  });
+  document.getElementById('t6sb').style.display='none';
+  document.getElementById('t6Score').style.display='none';
+}
+function calcT6(){
+  let s=0,t=fillItems.length;
+  fillItems.forEach(fi=>{const el=document.getElementById('fi_'+fi.n);if(el&&fuzzy(el.value,fi.ans))s++;});
+  return {s,t};
+}
+
+// ═══════════════════════════════
+//  SCORE
+// ═══════════════════════════════
+function showScore(panelId,bigId,subId,res,color){
+  const pct=Math.round(res.s/res.t*100);
+  const panel=document.getElementById(panelId);
+  panel.style.display='block';
+  document.getElementById(bigId).textContent=res.s+' / '+res.t;
+  document.getElementById(bigId).style.color=color;
+  document.getElementById(subId).textContent=pct+'% — '+(pct>=90?'🌟 Excellent!':pct>=70?'⭐ Good job!':pct>=50?'Keep reviewing!':'Don\'t give up! 💪');
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+// ═══════════════════════════════
+//  TABS
+// ═══════════════════════════════
+
+// ═══════════════════════════════
+//  INIT
+// ═══════════════════════════════
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const meta=JSON.parse(localStorage.getItem('unitMeta')||'{}');
+
+  const mt=meta.mainTab||'grammar';
+  document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.main-nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(mt).classList.add('active');
+  document.querySelectorAll('.main-nav-btn')[mt==='grammar'?0:1].classList.add('active');
+
+  const vt=meta.vocabTab||'t1';
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const vPanel=document.getElementById(vt);if(vPanel)vPanel.classList.add('active');
+  const tmap={t1:0,t2:1,t3:2,t4:3,t5:4,t6:5};
+  const tbns=document.querySelectorAll('.tab-btn');
+  if(tmap[vt]!==undefined&&tbns[tmap[vt]])tbns[tmap[vt]].classList.add('active');
+
+  buildAll();
+
+  G_loadAll();
+  const lsData=JSON.parse(localStorage.getItem('artQuiz_grade9_v2')||'{}');
+  for(let q=1;q<=4;q++){
+    if(lsData['lq'+q]){
+      landmarkSelected[q]=lsData['lq'+q];
+      const opt=document.getElementById('l'+q+lsData['lq'+q]);
+      if(opt)opt.classList.add('selected');
+      const radio=opt&&opt.querySelector('input[type="radio"]');
+      if(radio)radio.checked=true;
+    }
+  }
+});
+</script>
+</body>
+</html>
