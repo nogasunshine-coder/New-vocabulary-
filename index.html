@@ -803,48 +803,145 @@ header p{color:rgba(255,255,255,0.88);font-size:.9rem;margin-top:5px;font-weight
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px;" id="picGrid">
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Bridget_Riley_-_Movement_in_Squares_1961.jpg/240px-Bridget_Riley_-_Movement_in_Squares_1961.jpg"
-             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Checkerboard_pattern.svg/240px-Checkerboard_pattern.svg.png'"
-             alt="Movement in Squares" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#1a1a1a"/>
+          <!-- checkerboard pattern for Movement in Squares -->
+          <g fill="white">
+            <rect x="0" y="0" width="20" height="20"/><rect x="40" y="0" width="20" height="20"/><rect x="80" y="0" width="20" height="20"/><rect x="120" y="0" width="20" height="20"/><rect x="160" y="0" width="20" height="20"/>
+            <rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="100" y="20" width="20" height="20"/><rect x="140" y="20" width="20" height="20"/><rect x="180" y="20" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="120" y="40" width="20" height="20"/><rect x="160" y="40" width="20" height="20"/>
+            <rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="100" y="60" width="20" height="20"/><rect x="140" y="60" width="20" height="20"/><rect x="180" y="60" width="20" height="20"/>
+          </g>
+          <text x="100" y="82" text-anchor="middle" fill="#FFE066" font-size="9" font-family="Arial" font-weight="bold">Movement in Squares</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">a</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Chauvet_cave_paintings.jpg/320px-Chauvet_cave_paintings.jpg"
-             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Lascaux_painting.jpg/320px-Lascaux_painting.jpg'"
-             alt="Cave paintings" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#5C3A1E"/>
+          <ellipse cx="60" cy="55" rx="40" ry="25" fill="#8B4513" opacity="0.6"/>
+          <ellipse cx="140" cy="50" rx="35" ry="22" fill="#6B3410" opacity="0.5"/>
+          <!-- cave animal silhouettes -->
+          <path d="M40,50 Q55,30 75,45 Q80,55 70,60 Q55,65 40,58 Z" fill="#3B2008" opacity="0.8"/>
+          <path d="M110,48 Q125,28 148,42 Q155,52 145,58 Q128,63 112,57 Z" fill="#3B2008" opacity="0.8"/>
+          <circle cx="78" cy="44" r="2" fill="#FF6600" opacity="0.9"/>
+          <circle cx="152" cy="41" r="2" fill="#FF6600" opacity="0.9"/>
+          <text x="100" y="82" text-anchor="middle" fill="#FFE066" font-size="9" font-family="Arial" font-weight="bold">Cave Paintings ~45,000 yrs</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">b</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pierre-Auguste_Renoir_-_Landscape_at_Wargemont_-_Metropolitan.jpg/320px-Pierre-Auguste_Renoir_-_Landscape_at_Wargemont_-_Metropolitan.jpg"
-             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/320px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg'"
-             alt="Pointillism painting" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#87CEEB"/>
+          <!-- pointillism dots landscape -->
+          <rect x="0" y="55" width="200" height="35" fill="#228B22"/>
+          <circle cx="20" cy="20" r="8" fill="#228B22" opacity="0.8"/>
+          <circle cx="40" cy="15" r="10" fill="#2E8B57" opacity="0.8"/>
+          <circle cx="60" cy="18" r="9" fill="#006400" opacity="0.8"/>
+          <circle cx="160" cy="22" r="8" fill="#228B22" opacity="0.8"/>
+          <circle cx="180" cy="17" r="9" fill="#2E8B57" opacity="0.8"/>
+          <!-- dots scattered -->
+          <circle cx="30" cy="60" r="4" fill="#FF6347"/><circle cx="50" cy="65" r="3" fill="#FFD700"/><circle cx="70" cy="58" r="4" fill="#32CD32"/>
+          <circle cx="90" cy="63" r="3" fill="#FF69B4"/><circle cx="110" cy="60" r="4" fill="#FF8C00"/><circle cx="130" cy="65" r="3" fill="#9400D3"/>
+          <circle cx="150" cy="60" r="4" fill="#00CED1"/><circle cx="170" cy="63" r="3" fill="#FF4500"/>
+          <text x="100" y="82" text-anchor="middle" fill="#FFE066" font-size="9" font-family="Arial" font-weight="bold">Pointillism (dots), 1886</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">c</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/240px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
-             alt="Leonardo da Vinci" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#2C1810"/>
+          <!-- Mona Lisa style frame and figure -->
+          <rect x="30" y="5" width="140" height="80" rx="4" fill="#8B7355" opacity="0.3"/>
+          <!-- figure silhouette -->
+          <ellipse cx="100" cy="35" rx="20" ry="22" fill="#D2A679"/>
+          <path d="M80,55 Q100,75 120,55 L125,85 L75,85 Z" fill="#2F4F4F"/>
+          <path d="M88,25 Q100,15 112,25 Q115,35 100,38 Q85,35 88,25Z" fill="#C8956A"/>
+          <!-- hair -->
+          <path d="M82,28 Q75,45 78,65 Q90,70 100,68" fill="#3B2008" opacity="0.9"/>
+          <path d="M118,28 Q125,45 122,65 Q110,70 100,68" fill="#3B2008" opacity="0.9"/>
+          <text x="100" y="82" text-anchor="middle" fill="#FFE066" font-size="9" font-family="Arial" font-weight="bold">Da Vinci painting ~$450M</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">d</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/3d_street_art_julian_beever.jpg/320px-3d_street_art_julian_beever.jpg"
-             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/3D-Streetpainting_Remko_van_Schaik.jpg/320px-3D-Streetpainting_Remko_van_Schaik.jpg'"
-             alt="3D street art" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#708090"/>
+          <!-- city street perspective -->
+          <rect x="0" y="50" width="200" height="40" fill="#888"/>
+          <rect x="60" y="50" width="80" height="40" fill="#999"/>
+          <!-- 3D illusion hole effect -->
+          <ellipse cx="100" cy="60" rx="40" ry="20" fill="#1a1a2e"/>
+          <path d="M60,60 L80,90 L120,90 L140,60 Z" fill="#0a0a1a"/>
+          <!-- glow effect -->
+          <ellipse cx="100" cy="58" rx="35" ry="15" fill="none" stroke="#00BFFF" stroke-width="2" opacity="0.8"/>
+          <ellipse cx="100" cy="56" rx="28" ry="11" fill="none" stroke="#00BFFF" stroke-width="1.5" opacity="0.6"/>
+          <text x="100" y="82" text-anchor="middle" fill="#FFE066" font-size="9" font-family="Arial" font-weight="bold">3D Street Art</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">e</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Zinaida_Serebriakova_self-portrait.jpg/240px-Zinaida_Serebriakova_self-portrait.jpg"
-             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Berthe_Morisot_self-portrait.jpg/240px-Berthe_Morisot_self-portrait.jpg'"
-             alt="Woman artist" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#F5E6D3"/>
+          <!-- woman artist with palette -->
+          <ellipse cx="100" cy="30" rx="16" ry="18" fill="#D2A679"/>
+          <path d="M84,46 Q100,65 116,46 L120,88 L80,88 Z" fill="#8B0000" opacity="0.85"/>
+          <path d="M86,25 Q100,12 114,25 Q116,38 100,40 Q84,38 86,25Z" fill="#C8956A"/>
+          <!-- hair -->
+          <path d="M85,27 Q80,20 82,15 Q90,10 100,12 Q110,10 118,15 Q120,20 115,27" fill="#3B2008"/>
+          <!-- palette -->
+          <ellipse cx="135" cy="60" rx="22" ry="16" fill="#DEB887" transform="rotate(-15,135,60)"/>
+          <circle cx="128" cy="55" r="4" fill="#FF4444"/>
+          <circle cx="138" cy="52" r="4" fill="#FFD700"/>
+          <circle cx="147" cy="58" r="4" fill="#4444FF"/>
+          <circle cx="142" cy="67" r="4" fill="#44AA44"/>
+          <!-- brush -->
+          <line x1="100" y1="55" x2="130" y2="58" stroke="#8B4513" stroke-width="3"/>
+          <text x="100" y="82" text-anchor="middle" fill="#8B0000" font-size="9" font-family="Arial" font-weight="bold">Women in Art Schools</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">f</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Augustus_of_Prima_Porta_%28inv_2290%29.jpg/240px-Augustus_of_Prima_Porta_%28inv_2290%29.jpg"
-             alt="Augustus Caesar statue" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#D4C5A9"/>
+          <!-- Roman statue silhouette -->
+          <rect x="88" y="72" width="24" height="12" fill="#A0917A" rx="2"/>
+          <rect x="82" y="65" width="36" height="10" fill="#B0A080" rx="2"/>
+          <!-- toga body -->
+          <path d="M72,65 Q80,30 100,20 Q120,30 128,65 Z" fill="#E8DCC8"/>
+          <!-- arm raised -->
+          <path d="M100,40 Q115,30 135,35 Q138,40 130,42 Q118,38 108,44 Z" fill="#E8DCC8"/>
+          <!-- head -->
+          <ellipse cx="100" cy="18" rx="13" ry="15" fill="#D4B896"/>
+          <!-- laurel crown -->
+          <path d="M88,10 Q100,5 112,10" fill="none" stroke="#228B22" stroke-width="3"/>
+          <circle cx="88" cy="10" r="3" fill="#228B22"/>
+          <circle cx="100" cy="6" r="3" fill="#228B22"/>
+          <circle cx="112" cy="10" r="3" fill="#228B22"/>
+          <text x="100" y="88" text-anchor="middle" fill="#5C3A1E" font-size="9" font-family="Arial" font-weight="bold">Augustus Caesar, Rome 1863</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">g</div>
       </div>
       <div style="text-align:center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/320px-Louvre_Museum_Wikimedia_Commons.jpg"
-             alt="The Louvre" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <svg width="100%" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);display:block;">
+          <rect width="200" height="90" fill="#87CEEB"/>
+          <!-- Louvre pyramid -->
+          <rect x="0" y="60" width="200" height="30" fill="#C8B880"/>
+          <!-- main building -->
+          <rect x="10" y="35" width="75" height="30" fill="#E8DCC0"/>
+          <rect x="115" y="35" width="75" height="30" fill="#E8DCC0"/>
+          <!-- windows -->
+          <rect x="18" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/><rect x="30" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/><rect x="42" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/><rect x="54" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/>
+          <rect x="123" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/><rect x="135" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/><rect x="147" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/><rect x="159" y="40" width="8" height="10" fill="#6B9DC2" rx="1"/>
+          <!-- glass pyramid -->
+          <polygon points="100,18 60,62 140,62" fill="#A8D8EA" opacity="0.75" stroke="#6B9DC2" stroke-width="1.5"/>
+          <line x1="100" y1="18" x2="80" y2="62" stroke="#6B9DC2" stroke-width="1" opacity="0.5"/>
+          <line x1="100" y1="18" x2="120" y2="62" stroke="#6B9DC2" stroke-width="1" opacity="0.5"/>
+          <line x1="100" y1="18" x2="100" y2="62" stroke="#6B9DC2" stroke-width="1" opacity="0.5"/>
+          <!-- people -->
+          <circle cx="55" cy="65" r="3" fill="#555"/><circle cx="70" cy="64" r="3" fill="#555"/><circle cx="130" cy="65" r="3" fill="#555"/><circle cx="148" cy="64" r="3" fill="#555"/>
+          <text x="100" y="82" text-anchor="middle" fill="#1A3A5C" font-size="9" font-family="Arial" font-weight="bold">The Louvre, Paris</text>
+        </svg>
         <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">h</div>
       </div>
     </div>
