@@ -796,6 +796,60 @@ header p{color:rgba(255,255,255,0.88);font-size:.9rem;margin-top:5px;font-weight
     <button class="btn btn-score" id="showScoreBtn" onclick="G_showFinalScore()">🏆 Show My Score</button>
   </div>
 
+  <!-- ══════════ PICTURE GRID ══════════ -->
+  <div style="margin-top:28px;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:14px;color:#333;">
+      🖼️ Match each fact to one of the pictures below (a–h):
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px;" id="picGrid">
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Bridget_Riley_-_Movement_in_Squares_1961.jpg/240px-Bridget_Riley_-_Movement_in_Squares_1961.jpg"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Checkerboard_pattern.svg/240px-Checkerboard_pattern.svg.png'"
+             alt="Movement in Squares" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">a</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Chauvet_cave_paintings.jpg/320px-Chauvet_cave_paintings.jpg"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Lascaux_painting.jpg/320px-Lascaux_painting.jpg'"
+             alt="Cave paintings" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">b</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Pierre-Auguste_Renoir_-_Landscape_at_Wargemont_-_Metropolitan.jpg/320px-Pierre-Auguste_Renoir_-_Landscape_at_Wargemont_-_Metropolitan.jpg"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/320px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg'"
+             alt="Pointillism painting" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">c</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/240px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
+             alt="Leonardo da Vinci" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">d</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/3d_street_art_julian_beever.jpg/320px-3d_street_art_julian_beever.jpg"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/3D-Streetpainting_Remko_van_Schaik.jpg/320px-3D-Streetpainting_Remko_van_Schaik.jpg'"
+             alt="3D street art" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">e</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Zinaida_Serebriakova_self-portrait.jpg/240px-Zinaida_Serebriakova_self-portrait.jpg"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Berthe_Morisot_self-portrait.jpg/240px-Berthe_Morisot_self-portrait.jpg'"
+             alt="Woman artist" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">f</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Augustus_of_Prima_Porta_%28inv_2290%29.jpg/240px-Augustus_of_Prima_Porta_%28inv_2290%29.jpg"
+             alt="Augustus Caesar statue" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">g</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/320px-Louvre_Museum_Wikimedia_Commons.jpg"
+             alt="The Louvre" style="width:100%;height:90px;object-fit:cover;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.15);">
+        <div style="font-weight:900;font-size:1rem;margin-top:5px;color:#FF8C00;">h</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════ DIVIDER ══════════ -->
   <div class="section-divider"></div>
 
